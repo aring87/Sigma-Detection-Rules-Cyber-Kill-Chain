@@ -4,11 +4,11 @@ status: experimental
 description: |
   Sigma rule to detect: Services or DLL registration abuse
 references:
-
 author: adam.ring
 date: 2025-07-31
 tags:
-
+- attack.tactic.persistence
+- attack.technique.T1546
 logsource:
     category: process_creation
     product: windows
@@ -19,5 +19,4 @@ detection:
           | where FileName has_any ("sc.exe", "regsvr32.exe", "installutil.exe")
     condition: selection
 falsepositives:
-
 level: high

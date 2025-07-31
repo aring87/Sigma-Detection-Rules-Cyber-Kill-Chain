@@ -4,11 +4,11 @@ status: experimental
 description: |
   Sigma rule to detect: Email exfil with attachments via scripts
 references:
-
 author: adam.ring
 date: 2025-07-31
 tags:
-
+- attack.tactic.exfiltration
+- attack.technique.T1048.003
 logsource:
     category: process_creation
     product: windows
@@ -19,5 +19,4 @@ detection:
           | where ProcessCommandLine has_any ("smtp", "send-mailmessage", "email", "outlook")
     condition: selection
 falsepositives:
-
 level: high

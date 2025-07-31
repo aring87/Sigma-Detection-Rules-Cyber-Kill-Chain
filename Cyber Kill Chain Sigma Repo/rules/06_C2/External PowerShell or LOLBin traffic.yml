@@ -4,11 +4,11 @@ status: experimental
 description: |
   Sigma rule to detect: External PowerShell or LOLBin traffic
 references:
-
 author: adam.ring
 date: 2025-07-31
 tags:
-
+- attack.tactic.command-and-control
+- attack.technique.T1071.001
 logsource:
     category: network_connection
     product: windows
@@ -20,5 +20,4 @@ detection:
           | where InitiatingProcessFileName in~ ("powershell.exe", "wscript.exe", "mshta.exe")
     condition: selection
 falsepositives:
-
 level: high

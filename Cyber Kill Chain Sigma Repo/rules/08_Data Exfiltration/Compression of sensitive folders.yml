@@ -4,11 +4,11 @@ status: experimental
 description: |
   Sigma rule to detect: Compression of sensitive folders
 references:
-
 author: adam.ring
 date: 2025-07-31
 tags:
-
+- attack.tactic.collection
+- attack.technique.T1560.001
 logsource:
     category: process_creation
     product: windows
@@ -20,5 +20,4 @@ detection:
           | where ProcessCommandLine has_any ("C:\\Users", "Documents", "Desktop")
     condition: selection
 falsepositives:
-
 level: high

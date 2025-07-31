@@ -8,7 +8,8 @@ references:
 author: adam.ring
 date: 2025-07-31
 tags:
-
+- attack.tactic.initial-access
+- attack.technique.T1204.001
 logsource:
     category: file_event
     product: windows
@@ -20,5 +21,4 @@ detection:
           | where FolderPath has_any ("\\Downloads", "Temp")
     condition: selection
 falsepositives:
-
 level: high

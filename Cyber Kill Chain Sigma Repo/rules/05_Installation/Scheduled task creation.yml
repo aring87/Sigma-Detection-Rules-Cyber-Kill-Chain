@@ -4,11 +4,11 @@ status: experimental
 description: |
   Sigma rule to detect: Scheduled task creation
 references:
-
 author: adam.ring
 date: 2025-07-31
 tags:
-
+- attack.tactic.persistence
+- attack.technique.T1053.005
 logsource:
     category: process_creation
     product: windows
@@ -19,5 +19,4 @@ detection:
           | where ProcessCommandLine has "schtasks" and ProcessCommandLine has "/create"
     condition: selection
 falsepositives:
-
 level: high

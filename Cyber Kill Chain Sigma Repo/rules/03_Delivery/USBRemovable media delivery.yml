@@ -1,0 +1,24 @@
+title: USB/Removable media delivery
+id: sigma-012
+status: experimental
+description: |
+  Sigma rule to detect: USB/Removable media delivery
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: device_event
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceEvents
+          | where AdditionalFields has "Media"
+          | project TimeGenerated, DeviceName, ReportId, AdditionalFields
+    condition: selection
+falsepositives:
+
+level: high

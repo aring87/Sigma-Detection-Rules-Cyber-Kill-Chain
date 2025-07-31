@@ -1,0 +1,24 @@
+title: Sysinternals tool usage by unknown users
+id: sigma-026
+status: experimental
+description: |
+  Sigma rule to detect: Sysinternals tool usage by unknown users
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceProcessEvents
+          | where FileName in~ ("procdump.exe", "psexec.exe")
+          | where AccountName !in ("admin", "itadmin", "system")
+    condition: selection
+falsepositives:
+
+level: high

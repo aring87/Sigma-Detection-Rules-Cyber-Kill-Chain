@@ -1,0 +1,24 @@
+title: External PowerShell or LOLBin traffic
+id: sigma-021
+status: experimental
+description: |
+  Sigma rule to detect: External PowerShell or LOLBin traffic
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: network_connection
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceNetworkEvents
+          | where RemoteIPType == "Public"
+          | where InitiatingProcessFileName in~ ("powershell.exe", "wscript.exe", "mshta.exe")
+    condition: selection
+falsepositives:
+
+level: high

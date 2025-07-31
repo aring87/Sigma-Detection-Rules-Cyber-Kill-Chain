@@ -1,0 +1,25 @@
+title: Suspicious external login or autodiscover access
+id: sigma-003
+status: experimental
+description: |
+  Sigma rule to detect: Suspicious external login or autodiscover access
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: network_connection
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceNetworkEvents
+          | where RemoteUrl has_any ("login", "autodiscover", "owa", "activesync")
+          | where RemoteIPType == "Public"
+          | summarize count() by RemoteIP, RemoteUrl, DeviceName, bin(TimeGenerated, 1h)
+    condition: selection
+falsepositives:
+
+level: high

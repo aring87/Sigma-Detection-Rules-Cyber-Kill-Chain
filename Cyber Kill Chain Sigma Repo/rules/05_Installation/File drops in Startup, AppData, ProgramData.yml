@@ -1,0 +1,24 @@
+title: File drops in Startup, AppData, ProgramData
+id: sigma-018
+status: experimental
+description: |
+  Sigma rule to detect: File drops in Startup, AppData, ProgramData
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: file_event
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceFileEvents
+          | where FolderPath has_any ("Startup", "AppData", "ProgramData")
+          | where ActionType in~ ("FileCreated", "FileWritten")
+    condition: selection
+falsepositives:
+
+level: high

@@ -1,0 +1,23 @@
+title: Scheduled task creation
+id: sigma-016
+status: experimental
+description: |
+  Sigma rule to detect: Scheduled task creation
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceProcessEvents
+          | where ProcessCommandLine has "schtasks" and ProcessCommandLine has "/create"
+    condition: selection
+falsepositives:
+
+level: high

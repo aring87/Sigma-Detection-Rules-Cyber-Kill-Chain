@@ -1,0 +1,24 @@
+title: MSBuild to run payloads
+id: sigma-006
+status: experimental
+description: |
+  Sigma rule to detect: MSBuild to run payloads
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceProcessEvents
+          | where FileName =~ "msbuild.exe"
+          | where ProcessCommandLine has ".xml"
+    condition: selection
+falsepositives:
+
+level: high

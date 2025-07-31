@@ -1,0 +1,23 @@
+title: Services or DLL registration abuse
+id: sigma-017
+status: experimental
+description: |
+  Sigma rule to detect: Services or DLL registration abuse
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceProcessEvents
+          | where FileName has_any ("sc.exe", "regsvr32.exe", "installutil.exe")
+    condition: selection
+falsepositives:
+
+level: high

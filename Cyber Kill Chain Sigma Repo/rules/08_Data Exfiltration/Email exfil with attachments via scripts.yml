@@ -1,0 +1,23 @@
+title: Email exfil with attachments via scripts
+id: sigma-029
+status: experimental
+description: |
+  Sigma rule to detect: Email exfil with attachments via scripts
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceProcessEvents
+          | where ProcessCommandLine has_any ("smtp", "send-mailmessage", "email", "outlook")
+    condition: selection
+falsepositives:
+
+level: high

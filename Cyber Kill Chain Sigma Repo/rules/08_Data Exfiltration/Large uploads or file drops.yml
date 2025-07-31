@@ -1,0 +1,27 @@
+title: Large uploads or file drops
+id: sigma-027
+status: experimental
+description: |
+  Sigma rule to detect: Large uploads or file drops
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: file_event
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceFileEvents
+          | where ActionType == "FileCreated"
+          | where FolderPath has_any (":\\", "\\")
+          | where FileSize > 100000000
+          | project TimeGenerated, DeviceName, FolderPath, FileName, FileSizeMB = FileSize / 1e6, InitiatingProcessCommandLine
+          | sort by FileSizeMB desc
+    condition: selection
+falsepositives:
+
+level: high

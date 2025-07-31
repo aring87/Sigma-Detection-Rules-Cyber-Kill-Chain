@@ -1,0 +1,24 @@
+title: Known LSASS Dump Techniques
+id: sigma-030
+status: experimental
+description: |
+  Sigma rule to detect: Known LSASS Dump Techniques
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceProcessEvents
+          | where ProcessCommandLine has "lsass" and ProcessCommandLine has_any ("procdump", "comsvcs.dll", "rundll32", "taskmgr", "mini_dump")
+          | project TimeGenerated, DeviceName, AccountName, ProcessCommandLine
+    condition: selection
+falsepositives:
+
+level: high

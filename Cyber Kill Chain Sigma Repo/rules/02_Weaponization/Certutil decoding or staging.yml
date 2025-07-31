@@ -1,0 +1,24 @@
+title: Certutil decoding or staging
+id: sigma-007
+status: experimental
+description: |
+  Sigma rule to detect: Certutil decoding or staging
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceProcessEvents
+          | where FileName =~ "certutil.exe"
+          | where ProcessCommandLine has_any ("-decode", "-urlcache", "http")
+    condition: selection
+falsepositives:
+
+level: high

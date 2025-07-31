@@ -1,0 +1,26 @@
+title: NTLM Enumeration via Failed Logons
+id: sigma-004
+status: experimental
+description: |
+  Sigma rule to detect: NTLM Enumeration via Failed Logons
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: logon
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceLogonEvents
+          | where Protocol =~ "NTLM"
+          | where ActionType =~ "LogonFailed"
+          | summarize Attempts = count(), DistinctAccounts = dcount(AccountName) by DeviceName, RemoteIP, bin(TimeGenerated, 10m)
+          | where Attempts > 10
+    condition: selection
+falsepositives:
+
+level: high

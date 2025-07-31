@@ -1,0 +1,25 @@
+title: CSC Compilation in Temp/SystemTemp
+id: sigma-008
+status: experimental
+description: |
+  Sigma rule to detect: CSC Compilation in Temp/SystemTemp
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceProcessEvents
+          | where FileName =~ "csc.exe"
+          | where ProcessCommandLine has @"SystemTemp"
+          | project TimeGenerated, DeviceName, AccountName, ProcessCommandLine
+    condition: selection
+falsepositives:
+
+level: high

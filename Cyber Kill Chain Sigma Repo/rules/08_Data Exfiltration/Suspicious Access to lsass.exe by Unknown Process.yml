@@ -1,0 +1,24 @@
+title: Suspicious Access to lsass.exe by Unknown Process
+id: sigma-031
+status: experimental
+description: |
+  Sigma rule to detect: Suspicious Access to lsass.exe by Unknown Process
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: network_connection
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceNetworkEvents
+          | where InitiatingProcessCommandLine has "lsass"
+          | where InitiatingProcessFileName !in ("taskmgr.exe", "avprocess.exe", "procmon.exe")
+    condition: selection
+falsepositives:
+
+level: high

@@ -1,0 +1,24 @@
+title: Files dropped via browsers
+id: sigma-011
+status: experimental
+description: |
+  Sigma rule to detect: Files dropped via browsers
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: file_event
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceFileEvents
+          | where InitiatingProcessFileName has_any ("chrome.exe", "msedge.exe", "firefox.exe")
+          | where FolderPath has_any ("\\Downloads", "Temp")
+    condition: selection
+falsepositives:
+
+level: high

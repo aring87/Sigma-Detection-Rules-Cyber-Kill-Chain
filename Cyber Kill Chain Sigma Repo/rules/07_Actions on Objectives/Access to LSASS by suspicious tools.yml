@@ -1,0 +1,23 @@
+title: Access to LSASS by suspicious tools
+id: sigma-024
+status: experimental
+description: |
+  Sigma rule to detect: Access to LSASS by suspicious tools
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceProcessEvents
+          | where ProcessCommandLine has "lsass" and ProcessCommandLine has_any ("procdump", "comsvcs.dll", "rundll32")
+    condition: selection
+falsepositives:
+
+level: high

@@ -1,0 +1,24 @@
+title: Registry persistence via Run keys
+id: sigma-015
+status: experimental
+description: |
+  Sigma rule to detect: Registry persistence via Run keys
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: registry_event
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceRegistryEvents
+          | where RegistryKey has_any ("\\Run", "\\RunOnce", "Winlogon", "Shell")
+          | where ActionType =~ "RegistryValueSet"
+    condition: selection
+falsepositives:
+
+level: high

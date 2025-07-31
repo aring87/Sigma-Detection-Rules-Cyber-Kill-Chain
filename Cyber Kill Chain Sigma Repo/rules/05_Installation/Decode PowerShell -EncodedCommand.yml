@@ -1,0 +1,27 @@
+title: Decode PowerShell -EncodedCommand
+id: sigma-019
+status: experimental
+description: |
+  Sigma rule to detect: Decode PowerShell -EncodedCommand
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceProcessEvents
+          | where FileName =~ "powershell.exe"
+          | where ProcessCommandLine has_any ("-enc", "EncodedCommand")
+          | extend Encoded = extract(@"(?:-enc|EncodedCommand)\s+([a-zA-Z0-9+/=]+)", 1, ProcessCommandLine)
+          | extend Decoded = tostring(base64_decodestring(Encoded))
+          | project TimeGenerated, DeviceName, AccountName, ProcessCommandLine, Encoded, Decoded
+    condition: selection
+falsepositives:
+
+level: high

@@ -1,0 +1,24 @@
+title: Compile payloads with csc.exe
+id: sigma-005
+status: experimental
+description: |
+  Sigma rule to detect: Compile payloads with csc.exe
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceProcessEvents
+          | where FileName =~ "csc.exe"
+          | where ProcessCommandLine has_any (".cs", ".dll", ".exe")
+    condition: selection
+falsepositives:
+
+level: high

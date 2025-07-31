@@ -1,0 +1,25 @@
+title: DNS tunneling behavior
+id: sigma-022
+status: experimental
+description: |
+  Sigma rule to detect: DNS tunneling behavior
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: dns_query
+    product: windows
+detection:
+    selection:
+        query: |
+          DnsEvents
+          | where Name has_any (".xyz", ".pw", ".club", ".info")
+          | summarize count() by Name, bin(TimeGenerated, 5m)
+          | where count_ > 100
+    condition: selection
+falsepositives:
+
+level: high

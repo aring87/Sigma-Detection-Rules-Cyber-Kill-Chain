@@ -1,0 +1,24 @@
+title: LDAP/AD Enumeration (using PowerShell)
+id: sigma-002
+status: experimental
+description: |
+  Sigma rule to detect: LDAP/AD Enumeration (using PowerShell)
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: process_creation
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceProcessEvents
+          | where ProcessCommandLine has_any ("Get-ADUser", "Get-ADComputer", "Get-DomainUser", "net group", "dsquery")
+          | project TimeGenerated, DeviceName, AccountName, ProcessCommandLine
+    condition: selection
+falsepositives:
+
+level: high

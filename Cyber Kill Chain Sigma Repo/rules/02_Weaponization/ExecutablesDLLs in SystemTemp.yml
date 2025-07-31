@@ -1,0 +1,25 @@
+title: Executables/DLLs in SystemTemp
+id: sigma-009
+status: experimental
+description: |
+  Sigma rule to detect: Executables/DLLs in SystemTemp
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: file_event
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceFileEvents
+          | where FolderPath has @"SystemTemp"
+          | where FileName endswith ".exe" or FileName endswith ".dll"
+          | where ActionType in~ ("FileCreated", "FileWritten")
+    condition: selection
+falsepositives:
+
+level: high

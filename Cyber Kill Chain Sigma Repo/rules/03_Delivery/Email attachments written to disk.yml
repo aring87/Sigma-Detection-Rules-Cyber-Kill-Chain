@@ -1,0 +1,25 @@
+title: Email attachments written to disk
+id: sigma-010
+status: experimental
+description: |
+  Sigma rule to detect: Email attachments written to disk
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: file_event
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceFileEvents
+          | where FileName endswith ".docx" or FileName endswith ".xls" or FileName endswith ".js" or FileName endswith ".ps1"
+          | where FolderPath has_any ("\\Downloads", "AppData", "Temp")
+          | where ActionType =~ "FileCreated"
+    condition: selection
+falsepositives:
+
+level: high

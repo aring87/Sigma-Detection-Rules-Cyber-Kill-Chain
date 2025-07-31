@@ -1,0 +1,25 @@
+title: PowerShell script dropped to Temp
+id: sigma-020
+status: experimental
+description: |
+  Sigma rule to detect: PowerShell script dropped to Temp
+references:
+
+author: adam.ring
+date: 2025-07-31
+tags:
+
+logsource:
+    category: file_event
+    product: windows
+detection:
+    selection:
+        query: |
+          DeviceFileEvents
+          | where FolderPath has @"AppData\Local\Temp"
+          | where FileName has_any (".ps1", ".psm1")
+          | where InitiatingProcessFileName =~ "powershell.exe"
+    condition: selection
+falsepositives:
+
+level: high

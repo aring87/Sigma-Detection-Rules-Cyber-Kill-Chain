@@ -4,11 +4,11 @@ status: experimental
 description: |
   Sigma rule to detect: Compile payloads with csc.exe
 references:
-
 author: adam.ring
 date: 2025-07-31
 tags:
-
+- attack.tactic.defense-evasion
+- attack.technique.T1027
 logsource:
     category: process_creation
     product: windows
@@ -20,5 +20,4 @@ detection:
           | where ProcessCommandLine has_any (".cs", ".dll", ".exe")
     condition: selection
 falsepositives:
-
 level: high

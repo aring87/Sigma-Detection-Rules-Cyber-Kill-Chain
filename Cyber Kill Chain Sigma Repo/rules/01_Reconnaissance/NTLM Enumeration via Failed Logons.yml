@@ -8,7 +8,8 @@ references:
 author: adam.ring
 date: 2025-07-31
 tags:
-
+- attack.tactic.credential-access
+- attack.technique.T1110.001
 logsource:
     category: logon
     product: windows

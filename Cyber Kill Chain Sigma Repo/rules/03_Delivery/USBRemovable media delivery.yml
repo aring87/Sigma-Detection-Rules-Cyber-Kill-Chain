@@ -4,11 +4,11 @@ status: experimental
 description: |
   Sigma rule to detect: USB/Removable media delivery
 references:
-
 author: adam.ring
 date: 2025-07-31
 tags:
-
+- attack.tactic.initial-access
+- attack.technique.T1091
 logsource:
     category: device_event
     product: windows
@@ -20,5 +20,4 @@ detection:
           | project TimeGenerated, DeviceName, ReportId, AdditionalFields
     condition: selection
 falsepositives:
-
 level: high

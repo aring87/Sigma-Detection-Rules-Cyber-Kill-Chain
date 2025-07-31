@@ -4,11 +4,11 @@ status: experimental
 description: |
   Sigma rule to detect: Email attachments written to disk
 references:
-
 author: adam.ring
 date: 2025-07-31
 tags:
-
+- attack.tactic.exfiltration
+- attack.technique.T1048.003
 logsource:
     category: file_event
     product: windows
@@ -21,5 +21,4 @@ detection:
           | where ActionType =~ "FileCreated"
     condition: selection
 falsepositives:
-
 level: high

@@ -4,11 +4,11 @@ status: experimental
 description: |
   Sigma rule to detect: Registry persistence via Run keys
 references:
-
 author: adam.ring
 date: 2025-07-31
 tags:
-
+- attack.tactic.persistence
+- attack.technique.T1547.001
 logsource:
     category: registry_event
     product: windows
@@ -20,5 +20,4 @@ detection:
           | where ActionType =~ "RegistryValueSet"
     condition: selection
 falsepositives:
-
 level: high

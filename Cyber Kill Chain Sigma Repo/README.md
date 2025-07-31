@@ -4,10 +4,15 @@ This repository contains custom Sigma rules used in our detection engineering pr
 
 ## 📂 Structure
 
-- `rules/windows/process_creation/` – Sigma rules based on Defender DeviceProcessEvents
-- `rules/windows/network_connection/` – Network-related detections
-- `rules/windows/logon/` – Authentication-based detections
+- Reconnaissance
+- Weaponization
+- Delivery
+- Exploitation
+- Installation
+- C2
+- Actions of Objectives
+- Data Exfiltration
 
 ## 🧪 Usage
 
-These rules are designed for Microsoft Sentinel + Defender. They can be converted using [sigmac](https://github.com/SigmaHQ/sigma) or used in native KQL with Sentinel.
+These rules are pretty general and needs to be refined and tuned for specific enviroments and are designed for Microsoft Sentinel + Defender. They can be converted using [sigmac](https://github.com/SigmaHQ/sigma) or used in native KQL with Sentinel.

@@ -4,11 +4,11 @@ status: experimental
 description: |
   Sigma rule to detect: DNS tunneling behavior
 references:
-
 author: adam.ring
 date: 2025-07-31
 tags:
-
+- attack.tactic.command-and-control
+- attack.technique.T1071.004
 logsource:
     category: dns_query
     product: windows
@@ -21,5 +21,4 @@ detection:
           | where count_ > 100
     condition: selection
 falsepositives:
-
 level: high

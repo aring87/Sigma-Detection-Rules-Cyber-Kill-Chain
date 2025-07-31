@@ -4,11 +4,11 @@ status: experimental
 description: |
   Sigma rule to detect: DNS Enumeration via command-line tools
 references:
-
 author: adam.ring
 date: 2025-07-31
 tags:
-
+- attack.tactic.reconnaissance
+- attack.technique.T1046
 logsource:
     category: process_creation
     product: windows
@@ -20,5 +20,4 @@ detection:
           | project TimeGenerated, DeviceName, AccountName, FileName, ProcessCommandLine
     condition: selection
 falsepositives:
-
 level: high

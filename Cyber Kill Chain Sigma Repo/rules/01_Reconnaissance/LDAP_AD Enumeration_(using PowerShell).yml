@@ -4,7 +4,6 @@ status: experimental
 description: |
   Sigma rule to detect: LDAP/AD Enumeration (using PowerShell)
 references:
-
 author: adam.ring
 date: 2025-07-31
 tags:
@@ -21,5 +20,4 @@ detection:
           | project TimeGenerated, DeviceName, AccountName, ProcessCommandLine
     condition: selection
 falsepositives:
-
 level: high

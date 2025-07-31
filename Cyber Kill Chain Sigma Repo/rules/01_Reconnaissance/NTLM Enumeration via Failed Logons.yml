@@ -4,7 +4,6 @@ status: experimental
 description: |
   Sigma rule to detect: NTLM Enumeration via Failed Logons
 references:
-
 author: adam.ring
 date: 2025-07-31
 tags:
@@ -23,5 +22,4 @@ detection:
           | where Attempts > 10
     condition: selection
 falsepositives:
-
 level: high
